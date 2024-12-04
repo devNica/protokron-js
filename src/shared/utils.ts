@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-
 import { MultiFormatTimeModel, Time12HModel, Time24HModel, TimeCalculatorModel, DayEn, DayEs } from 'src/models'
 
 const MILISECONDS = 1000 // miliseconds in a second
@@ -35,7 +34,7 @@ export const namesDaysWeekEs: DayEs[] = ['domingo', 'lunes', 'martes', 'miercole
  * const dayName = getDayName("2024-11-05T00:00:00Z");
  * console.log('dayName: ', dayName); // 'dayName: tuesday'
  */
-export function getDayName(date: Date): DayEn {
+export function getDayName (date: Date): DayEn {
   return namesDaysWeekEN[date.getDay()]
 }
 
@@ -47,7 +46,7 @@ export function getDayName(date: Date): DayEn {
  * const hour = convertDecimalTo24HourFormat(6.75);
  * console.log('hour: ', days); // 'hour: 06:45'
  */
-export function convertDecimalTo24HourFormat(decimalTime: number): Time24HModel {
+export function convertDecimalTo24HourFormat (decimalTime: number): Time24HModel {
   if (decimalTime < 0 || decimalTime > 24) {
     throw Error('Invalid input format for decimal time')
   }
@@ -71,7 +70,7 @@ export function convertDecimalTo24HourFormat(decimalTime: number): Time24HModel 
  * const time12h = convert24HourTo12HourFormat("14:30");
  * console.log(time12h); // "02:30 PM"
  */
-export function convert24HourTo12HourFormat(time: Time24HModel): Time12HModel {
+export function convert24HourTo12HourFormat (time: Time24HModel): Time12HModel {
   const [h, m] = time.split(':').map(Number)
   const period = h >= 12 ? 'PM' : 'AM'
   const h12 = h % 12 || 12
@@ -89,15 +88,13 @@ export function convert24HourTo12HourFormat(time: Time24HModel): Time12HModel {
  * const days = calculateDaysBetweenDates("2024-11-05T00:00:00Z", "2024-11-15T00:00:00", true);
  * console.log('days: ', days); // 'days: 11'
  */
-export function calculateDaysBetweenDates(from: Date, to: Date, inclusive = false): number {
-
+export function calculateDaysBetweenDates (from: Date, to: Date, inclusive = false): number {
   const differenceInMilliseconds = to.getTime() - from.getTime()
 
   const days = differenceInMilliseconds / (MILISECONDS * SECONDS_HOUR * HOURS_DAY)
 
   return days + Number(inclusive)
 }
-
 
 /**
  * Receives an array of two elements, containing two hours in 24h format
@@ -109,8 +106,7 @@ export function calculateDaysBetweenDates(from: Date, to: Date, inclusive = fals
  * const result = perforTimeArithmetic(['07:00', '15:00'], 'sub');
  * console.log('R: ', result); // 'R: { decimalTime: -8, time24H: '08:00' }'
  */
-export function perforTimeArithmetic(times: Time24HModel[], mode: 'sum' | 'sub'): MultiFormatTimeModel {
-
+export function perforTimeArithmetic (times: Time24HModel[], mode: 'sum' | 'sub'): MultiFormatTimeModel {
   if (times.length !== 2) throw new Error('The number of elements in the array must be equal to "2"')
 
   const [h1, m1] = times[0].split(':').map(Number)
@@ -138,7 +134,7 @@ export function perforTimeArithmetic(times: Time24HModel[], mode: 'sum' | 'sub')
  * const time = calculateTimeBetweenDates("2024-11-05T00:00:00Z", "2024-11-06T12:00:00");
  * console.log('time: ', time); // 'time: { timeInHours: 36, timeInMinutes: 864, timeInSeconds: 51840, polarity: true }'
  */
-export function calculateTimeBetweenDates(from: Date, to: Date): TimeCalculatorModel {
+export function calculateTimeBetweenDates (from: Date, to: Date): TimeCalculatorModel {
   const timeInMiliseconds = to.getTime() - from.getTime()
 
   const timeInHours = timeInMiliseconds / (MILISECONDS * SECONDS_HOUR)
@@ -159,7 +155,7 @@ export function calculateTimeBetweenDates(from: Date, to: Date): TimeCalculatorM
  * const time = getTimeFromDate("2024-11-05T07:45:00Z", 5);
  * console.log('time: ', time); // 'time: 12:45'
  */
-export function getTimeFromDate(date: Date, addHours: number): Time24HModel {
+export function getTimeFromDate (date: Date, addHours: number): Time24HModel {
   const adjustedDate = new Date(date)
   adjustedDate.setHours(date.getHours() + addHours)
   const hour = adjustedDate.getHours().toString().padStart(2, '0')
@@ -168,7 +164,6 @@ export function getTimeFromDate(date: Date, addHours: number): Time24HModel {
   return `${hour}:${minutes}`
 }
 
-
 /**
  * calculates the result of adding to the implicit time of any date, an amount of time specified in 24-hour format.
  * @param {Date} date Any entry date
@@ -176,19 +171,17 @@ export function getTimeFromDate(date: Date, addHours: number): Time24HModel {
  * @returns {Date} Returns the result of the operation
  * @example
  * const time = addTimeToDate(new Date("2024-10-01T:00:00:00Z"), "10:25");
- * console.log('time: ', time); // 'time: 2024-10-01T:10:25:00Z' 
+ * console.log('time: ', time); // 'time: 2024-10-01T:10:25:00Z'
  */
-export function addTimeToDate(date: Date, hour: Time24HModel): Date {
-
+export function addTimeToDate (date: Date, hour: Time24HModel): Date {
   const [hours, minutes] = hour.split(':').map(Number)
 
   if (isNaN(hours) || isNaN(minutes) || hours < 0 || hours >= 24 || minutes < 0 || minutes >= 60) {
-    throw new Error('The time format must be "HH:mm" and be in the valid range.');
+    throw new Error('The time format must be "HH:mm" and be in the valid range.')
   }
 
   const adjustDate = new Date(date)
   adjustDate.setHours(date.getHours() + hours, date.getMinutes() + minutes)
 
   return adjustDate
-
 }

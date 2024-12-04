@@ -16,6 +16,17 @@
     },
     "plugins": ["@typescript-eslint"],
     "rules": {
-
+        "@typescript-eslint/member-ordering": [
+            "error",
+            {
+                "default": [
+                    "static-field",
+                    "instance-field",
+                    "constructor",
+                    "static-method",
+                    "instance-method"
+                ]
+            }
+        ]
     }
 }

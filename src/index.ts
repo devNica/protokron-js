@@ -21,47 +21,45 @@ export * as CoreModels from './models'
 export * as Tools from './shared'
 
 /**
- * Protokron is a class that through the facade pattern provides an API for interaction 
+ * Protokron is a class that through the facade pattern provides an API for interaction
  * with the Skeduller and Kallendar modules of the library itself.
  */
 export default class Protokon {
+  private static kallendarInstance: Kallendar
 
-    private static kallendarInstance: Kallendar
+  private static skedullerInstance: Skeduller
 
-    private static skedullerInstance: Skeduller
+  private constructor () {}
 
-    private constructor(){}
-
-    /**
+  /**
      * Initializes the `Skeduller` class with input data and configuration.
      * @param {SkedullerConfigModel} config Configuration required by the module.
      * @param {SkedullerInputDataModel} data Array of input schedules data.
      * @returns {Skeduller} An instance of the `Skeduller` module.
      */
-    static initSkeduller(config: SkedullerConfigModel, data?: SkedullerInputDataModel[]): Skeduller {
-        this.skedullerInstance = Skeduller.newInstance(config)
+  static initSkeduller (config: SkedullerConfigModel, data?: SkedullerInputDataModel[]): Skeduller {
+    this.skedullerInstance = Skeduller.newInstance(config)
 
-        if (data && data.length > 0) {
-            this.skedullerInstance.setSchedules(data)
-        }
-
-        return this.skedullerInstance
+    if (data && data.length > 0) {
+      this.skedullerInstance.setSchedules(data)
     }
 
-    /**
+    return this.skedullerInstance
+  }
+
+  /**
      * Initializes the `Kallendar` class with input data and configuration.
      * @param {KallendaConfigModel} config Configuration required by the module.
-     * @param data Array of input meeting data. 
+     * @param data Array of input meeting data.
      * @returns {Kallendar} An instance of the `Kallendar` module
      */
-    static initKallendar(config: KallendaConfigModel, data?: MeetDataModel[]): Kallendar {
-        this.kallendarInstance = Kallendar.newInstance(config)
+  static initKallendar (config: KallendaConfigModel, data?: MeetDataModel[]): Kallendar {
+    this.kallendarInstance = Kallendar.newInstance(config)
 
-        if (data && data.length > 0) {
-            this.kallendarInstance.setMeets(data)
-        }
-
-        return this.kallendarInstance
+    if (data && data.length > 0) {
+      this.kallendarInstance.setMeets(data)
     }
 
+    return this.kallendarInstance
+  }
 }
