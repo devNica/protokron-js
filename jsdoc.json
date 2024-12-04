@@ -1,0 +1,12 @@
+{
+    "source": {
+        "include": ["src"],
+        "includePattern": "\\.(js|ts)$"
+    },
+    "opts": {
+        "destination": "./docs",
+        "recurse": true,
+        "template": "templates/default",
+        "encoding": "utf8"
+    }
+}

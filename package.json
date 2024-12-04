@@ -1,0 +1,42 @@
+{
+  "name": "@devNica/protokron-js",
+  "version": "0.0.4-beta",
+  "main": "/build/src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/devNica/protokron-js"
+  },
+  "scripts": {
+    "lint:fix": "eslint . --fix --ext .ts",
+    "dev": "tsnd -r tsconfig-paths/register --respawn --transpile-only --files src/index.ts",
+    "prebuild": "npm run clean",
+    "build": "npm run clean && tsc --project tsconfig.json && npm run docreadme",
+    "clean": "rimraf dist",
+    "start": "node dist/src/index.js",
+    "docs": "jsdoc2md --files src/**/*.{ts,js} > README.md",
+    "docreadme": "npx jsdoc2md --files dist/**/*.js > README.md"
+  },
+  "keywords": [],
+  "author": "A. Alejandro Gonsalez",
+  "license": "Apache-2.0",
+  "description": "",
+  "devDependencies": {
+    "@babel/eslint-parser": "^7.25.9",
+    "@babel/preset-typescript": "^7.26.0",
+    "@typescript-eslint/eslint-plugin": "^8.16.0",
+    "@typescript-eslint/parser": "^8.16.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-n": "^16.6.2",
+    "eslint-plugin-promise": "^6.6.0",
+    "jsdoc-to-markdown": "^9.1.0",
+    "module-alias": "2.2.3",
+    "reflect-metadata": "0.2.2",
+    "ts-node-dev": "2.0.0",
+    "tsc-alias": "1.8.10",
+    "tsconfig-paths": "4.2.0",
+    "typedoc": "^0.27.1",
+    "typedoc-plugin-markdown": "^4.3.0",
+    "typescript": "5.7.2"
+  }
+}

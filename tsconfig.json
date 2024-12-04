@@ -1,0 +1,30 @@
+{
+    "compilerOptions": {
+        "target": "ES2021",
+        "downlevelIteration": true,
+        "importHelpers": true,
+        "module": "commonjs",
+        "declaration": true,
+        "strict": true,
+        "pretty": true,
+        "noImplicitReturns": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "experimentalDecorators": true,
+        "baseUrl": ".",
+        "resolveJsonModule": true,
+        "sourceMap": true,
+        "inlineSources": true,
+        "types": [
+            "node"
+        ],
+        "outDir": "dist",
+        "rootDir": "./",
+    },
+    "exclude": [
+        "node_modules",
+        "dist",
+        "docs",
+        ".md"
+    ]
+}
